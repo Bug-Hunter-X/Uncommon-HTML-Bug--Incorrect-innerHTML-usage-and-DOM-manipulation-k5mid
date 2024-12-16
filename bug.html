@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Uncommon HTML Bug</title>
+</head>
+<body>
+  <div id="myDiv">
+    This is some text.
+  </div>
+  <script>
+    //Incorrectly attempting to modify the div content directly
+    document.getElementById("myDiv").textContent = "New text";
+    document.getElementById("myDiv").innerHTML = "<p>This is a paragraph</p>"; //Overwrites previous changes
+
+    //Correct way to modify the div content
+    let myDiv = document.getElementById("myDiv");
+    myDiv.textContent = "New Text";
+    let newPara = document.createElement("p");
+    newPara.textContent="This is new paragraph added dynamically";
+    myDiv.appendChild(newPara);
+
+    //Uncommon bug : Incorrect use of innerHTML leading to XSS vulnerabilities
+    let userInput = prompt("Enter some text:");
+    document.getElementById("myDiv").innerHTML = userInput; //Security Risk
+  </script>
+</body>
+</html>
