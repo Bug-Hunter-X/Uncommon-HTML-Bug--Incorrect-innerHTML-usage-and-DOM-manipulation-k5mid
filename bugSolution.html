@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Uncommon HTML Bug Solution</title>
+</head>
+<body>
+  <div id="myDiv">
+    This is some text.
+  </div>
+  <script>
+    //Correct way to modify the div content
+    let myDiv = document.getElementById("myDiv");
+    myDiv.textContent = "New Text";
+    let newPara = document.createElement("p");
+    newPara.textContent="This is new paragraph added dynamically";
+    myDiv.appendChild(newPara);
+
+    //Safe way to handle user input (escaping special characters)
+    let userInput = prompt("Enter some text:");
+    let safeUserInput = userInput.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    let safePara = document.createElement("p");
+    safePara.textContent = safeUserInput;
+    myDiv.appendChild(safePara);
+  </script>
+</body>
+</html>
